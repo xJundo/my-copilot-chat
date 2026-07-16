@@ -55,6 +55,7 @@ import { InlineCompletionContribution } from '../../typescriptContext/vscode-nod
 import { NesRenameContribution } from '../../typescriptContext/vscode-node/nesRenameService';
 import * as workspaceIndexingContribution from '../../workspaceChunkSearch/vscode-node/workspaceChunkSearch.contribution';
 import { WorkspaceRecorderFeature } from '../../workspaceRecorder/vscode-node/workspaceRecorderFeature';
+import { AntigravityChatContribution } from '../../antigravity/antigravityChatContribution';
 import vscodeContributions from '../vscode/contributions';
 
 // ###################################################################################################
@@ -67,6 +68,7 @@ import vscodeContributions from '../vscode/contributions';
 
 export const vscodeNodeContributions: IExtensionContributionFactory[] = [
 	...vscodeContributions,
+	asContributionFactory(AntigravityChatContribution),
 	asContributionFactory(ExtensionStateCommandContribution),
 	asContributionFactory(ConversationFeature),
 	asContributionFactory(AuthenticationContrib),

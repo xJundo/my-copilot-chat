@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Antigravity Chat</title>
+	<link rel="stylesheet" href="${cssUri}">
+</head>
+<body>
+	<div class="app-container">
+		<!-- Top Settings Toolbar -->
+		<header class="toolbar">
+			<div class="toolbar-row">
+				<div class="toolbar-item">
+					<label for="provider-select">Provider</label>
+					<select id="provider-select">
+						<option value="VS Code Native">VS Code Native</option>
+						<option value="OpenAI">OpenAI</option>
+						<option value="Anthropic">Anthropic</option>
+						<option value="Gemini">Gemini</option>
+					</select>
+				</div>
+				<div class="toolbar-item" id="api-key-container" style="display: none;">
+					<label for="api-key-input">API Key</label>
+					<input type="password" id="api-key-input" placeholder="Enter API Key...">
+				</div>
+				<div class="toolbar-item">
+					<label for="model-select">Model</label>
+					<select id="model-select">
+						<option value="gpt-4o">gpt-4o (Copilot)</option>
+						<option value="claude-3-5-sonnet">claude-3.5 (Copilot)</option>
+						<option value="gemini-1.5-pro">gemini-1.5-pro (Copilot)</option>
+					</select>
+				</div>
+			</div>
+			<div class="toolbar-row">
+				<div class="toolbar-item">
+					<label for="approval-select">Approvals</label>
+					<select id="approval-select">
+						<option value="Default Approvals" selected>Default Approvals</option>
+						<option value="Local only">Local only</option>
+						<option value="Never ask">Never ask</option>
+						<option value="Always ask">Always ask</option>
+					</select>
+				</div>
+				<div class="toolbar-item">
+					<label for="thinking-select">Thinking Effort</label>
+					<select id="thinking-select">
+						<option value="None" selected>None (Default)</option>
+						<option value="High">High</option>
+						<option value="Max">Max</option>
+					</select>
+				</div>
+				<div class="toolbar-item btn-item">
+					<button id="sessions-toggle-btn" class="secondary-btn">Sessions</button>
+				</div>
+			</div>
+		</header>
+
+		<!-- Main Workspace Layout -->
+		<main class="main-layout">
+			<!-- Sessions Sidebar -->
+			<aside class="sidebar" id="sessions-sidebar" style="display: none;">
+				<div class="sidebar-header">
+					<h3>Sessions</h3>
+					<button id="new-session-btn" class="primary-btn">+ New</button>
+				</div>
+				<ul class="session-list" id="session-list-ul">
+					<!-- Sessions populated by JS -->
+				</ul>
+			</aside>
+
+			<!-- Chat Area -->
+			<section class="chat-area">
+				<div class="chat-history" id="chat-history">
+					<!-- Welcome message -->
+					<div class="message system-message">
+						<div class="message-content">
+							Welcome to <strong>Antigravity Copilot Chat</strong>. Type a message or use <code>@</code> to reference files and directories to begin.
+						</div>
+					</div>
+				</div>
+
+				<!-- Walkthrough Plan Container (hidden unless active) -->
+				<div id="walkthrough-container" class="walkthrough-container" style="display: none;">
+					<div class="walkthrough-header">
+						<h4>Implementation Plan</h4>
+					</div>
+					<div id="walkthrough-plan-desc" class="walkthrough-plan-desc"></div>
+					<div id="walkthrough-steps-list" class="walkthrough-steps-list"></div>
+					<div class="walkthrough-controls">
+						<button id="proceed-btn" class="primary-btn">Proceed Next Step</button>
+					</div>
+				</div>
+
+				<!-- Input Form -->
+				<div class="input-panel">
+					<!-- Autocomplete suggestion box -->
+					<div id="autocomplete-box" class="autocomplete-box" style="display: none;">
+						<!-- Autocomplete choices populated by JS -->
+					</div>
+					<div class="input-wrapper">
+						<textarea id="chat-input" placeholder="Type a message... Use @ to reference files" rows="2"></textarea>
+						<button id="send-btn" class="primary-btn">Send</button>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<!-- Bottom Tabs Panel -->
+		<footer class="bottom-panel">
+			<nav class="tab-header">
+				<button class="tab-btn active" data-tab="tab-tasks">Background Tasks <span class="tab-badge" id="tasks-badge">0</span></button>
+				<button class="tab-btn" data-tab="tab-artefacts">Artefacts <span class="tab-badge" id="artefacts-badge">0</span></button>
+				<button class="tab-btn" data-tab="tab-changes">Code Changes <span class="tab-badge" id="changes-badge">0</span></button>
+			</nav>
+			<div class="tab-content-container">
+				<!-- Background Tasks -->
+				<div class="tab-content active" id="tab-tasks">
+					<div class="tasks-list" id="tasks-list-div">
+						<div class="empty-tab-message">No running background tasks.</div>
+					</div>
+				</div>
+
+				<!-- Artefacts -->
+				<div class="tab-content" id="tab-artefacts">
+					<div class="artefacts-list" id="artefacts-list-div">
+						<div class="empty-tab-message">No artefacts generated yet.</div>
+					</div>
+				</div>
+
+				<!-- Code Changes (Diff reviewer) -->
+				<div class="tab-content" id="tab-changes">
+					<div id="changes-diff-container" class="changes-diff-container">
+						<div class="empty-tab-message">No pending code changes to review.</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+	<script src="${jsUri}"></script>
+</body>
+</html>

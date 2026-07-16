@@ -6620,6 +6620,13 @@
           "icon": "$(inspect)",
           "when": "github.copilot.chat.showContextInspectorView"
         }
+      ],
+      "antigravity-copilot": [
+        {
+          "id": "antigravity-copilot.chatView",
+          "name": "Antigravity Chat",
+          "type": "webview"
+        }
       ]
     },
     "viewsContainers": {
@@ -6633,6 +6640,11 @@
           "id": "context-inspector",
           "title": "Language Context Inspector",
           "icon": "$(inspect)"
+        },
+        {
+          "id": "antigravity-copilot",
+          "title": "Antigravity Chat",
+          "icon": "$(comment-discussion)"
         }
       ]
     },
